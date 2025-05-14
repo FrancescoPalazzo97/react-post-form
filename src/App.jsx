@@ -1,15 +1,41 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const postEndpoint = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts"
 
 function App() {
 
   const [data, setData] = useState({
-    name: "",
+    author: "",
     title: "",
     body: "",
     public: false
   })
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const { author, title, body } = data
+
+    if (author && title && body) {
+      axios.post(postEndpoint, data)
+        .then(res => {
+          console.log(res.data)
+          alert("Post inviato con successo")
+          setData({
+            author: "",
+            title: "",
+            body: "",
+            public: false
+          })
+        })
+        .catch(err => {
+          console.error(err)
+          alert("Errore durante l'invio del post")
+        })
+    } else {
+      alert("Compila tutti i campi")
+    }
+  }
 
   return (
     <>
@@ -32,7 +58,8 @@ function App() {
                     id='author'
                     className='form-control'
                     placeholder='Inserisci il nome'
-                    value={data.name}
+                    value={data.author}
+                    onChange={(e) => setData({ ...data, author: e.target.value })}
                   />
                 </div>
                 {/* Title */}
@@ -45,6 +72,7 @@ function App() {
                     className='form-control'
                     placeholder='Inserisci il titolo'
                     value={data.title}
+                    onChange={(e) => setData({ ...data, title: e.target.value })}
                   />
                 </div>
                 {/* Body description */}
@@ -58,6 +86,7 @@ function App() {
                     className='form-control'
                     placeholder='Inserisci il testo del post'
                     value={data.body}
+                    onChange={(e) => setData({ ...data, body: e.target.value })}
                   />
                 </div>
                 {/* Checkbox */}
@@ -69,13 +98,18 @@ function App() {
                       id="public"
                       name='public'
                       checked={data.public}
+                      onChange={(e) => setData({ ...data, public: e.target.checked })}
                     />
                     <label htmlFor="public" className="form-check-labelq">Pubblica post</label>
                   </div>
                 </div>
                 {/* Send Button */}
                 <div className="col-12">
-                  <button type='submit' className='btn btn-primary'>Invia post</button>
+                  <button
+                    type='submit'
+                    className='btn btn-primary'
+                    onClick={e => handleSubmit(e)}
+                  >Invia post</button>
                 </div>
               </div>
             </form>
