@@ -1,4 +1,15 @@
+import { useState, useEffect } from 'react'
+
+const postEndpoint = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts"
+
 function App() {
+
+  const [data, setData] = useState({
+    name: "",
+    title: "",
+    body: "",
+    public: false
+  })
 
   return (
     <>
@@ -21,7 +32,7 @@ function App() {
                     id='author'
                     className='form-control'
                     placeholder='Inserisci il nome'
-                    value=""
+                    value={data.name}
                   />
                 </div>
                 {/* Title */}
@@ -33,12 +44,12 @@ function App() {
                     id='title'
                     className='form-control'
                     placeholder='Inserisci il titolo'
-                    value=""
+                    value={data.title}
                   />
                 </div>
                 {/* Body description */}
                 <div className="col-12 my-3">
-                  <label htmlFor="" className="form-label">Descrizione</label>
+                  <label className="form-label">Descrizione</label>
                   <textarea
                     name="body"
                     id="body"
@@ -46,7 +57,7 @@ function App() {
                     rows="10"
                     className='form-control'
                     placeholder='Inserisci il testo del post'
-                    value=""
+                    value={data.body}
                   />
                 </div>
                 {/* Checkbox */}
@@ -57,9 +68,9 @@ function App() {
                       className="form-check-input"
                       id="public"
                       name='public'
-                      checked="false"
+                      checked={data.public}
                     />
-                    <label htmlFor="updates" className="form-check-labelq">Pubblica post</label>
+                    <label htmlFor="public" className="form-check-labelq">Pubblica post</label>
                   </div>
                 </div>
                 {/* Send Button */}
