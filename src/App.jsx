@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import Header from './components/Header'
+
 const postEndpoint = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts"
 
 function App() {
@@ -40,11 +42,7 @@ function App() {
   return (
     <>
       <div className='container'>
-        <header className="row py-5">
-          <div className="col-12 text-center text-uppercase">
-            <h2>React Post Form</h2>
-          </div>
-        </header>
+        <Header />
         <main className="row">
           <div className="col-12">
             <form action="" className='border rounded bg-light p-4'>
