@@ -5,7 +5,7 @@ const Main = ({ data, handleChange, handleSubmit }) => {
     return (
         <main className="row">
             <div className="col-12">
-                <form action="" className='border rounded bg-light p-4'>
+                <form action="" className='border rounded bg-light p-4' onSubmit={e => handleSubmit(e)}>
                     <div className="row g3">
                         {/* Author */}
                         <Input
@@ -36,7 +36,7 @@ const Main = ({ data, handleChange, handleSubmit }) => {
                             <button
                                 type='submit'
                                 className='btn btn-primary'
-                                onClick={e => handleSubmit(e)}
+                            // onClick={e => handleSubmit(e)}
                             >Invia post</button>
                         </div>
                     </div>
